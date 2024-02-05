@@ -1,4 +1,5 @@
 # code for NLP
+# code for NLP
 # start with project text file. Pull its tagged words. Also pull its whole text.
 # objective: Learn to open and read in data from files.
 # play with spaCy
