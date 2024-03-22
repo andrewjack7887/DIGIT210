@@ -61,88 +61,88 @@ for p in headline_body:
 
 print(CNBC_article_text)
 
-## Yahoo Finance ##
+# Yahoo Finance ##
 
-# print("\n\nLet's look at Yahoo Finance. . .\n\n")
-# Get URL
-# url = 'https://finance.yahoo.com/'
-# response = requests.get(url)
-# html_content = response.text
+print("\n\nLet's look at Yahoo Finance. . .\n\n")
+Get URL
+url = 'https://finance.yahoo.com/'
+response = requests.get(url)
+html_content = response.text
 
-# # Set up BeutifulSoup
-# soup = BeautifulSoup(html_content, 'html.parser')
+# Set up BeutifulSoup
+soup = BeautifulSoup(html_content, 'html.parser')
 
-# # Find the headline article
-# headline_link = soup.find(class_="js-content-viewer").find(class_="W(100%)")['alt']
-# # print("The top article is " + headline_link + "\nLet's read this article. . . \n\n")
+# Find the headline article
+headline_link = soup.find(class_="js-content-viewer").find(class_="W(100%)")['alt']
+# print("The top article is " + headline_link + "\nLet's read this article. . . \n\n")
 
-# yahoo_article_text = headline_link
+yahoo_article_text = headline_link
 
-# Go to headline article
-# url = headline_link
-# response = requests.get(url)
-# html_content = response.text
+Go to headline article
+url = headline_link
+response = requests.get(url)
+html_content = response.text
 
-# # Set up BeutifulSoup
-# soup = BeautifulSoup(html_content, 'html.parser')
+# Set up BeutifulSoup
+soup = BeautifulSoup(html_content, 'html.parser')
 
-# # Find body element
-# headline_body = soup.find('div', class_='caas-body').find_all('p')
+# Find body element
+headline_body = soup.find('div', class_='caas-body').find_all('p')
 
-# yahoo_article_text = ""
-# for p in headline_body:
-#     yahoo_article_text += p.text
-####
-
-
+yahoo_article_text = ""
+for p in headline_body:
+    yahoo_article_text += p.text
+###
 
 
 
 
-# # Example financial article
-# print("Here are the two headlines: \n")
-# headlines = ""
-# headlines += CNBC_article_text + "\n"
-# headlines += yahoo_article_text
-# print(headlines)
-
-# # Tokenize the article
-# tokens = word_tokenize(headlines)
-
-# # Remove stopwords
-# stop_words = set(stopwords.words('english'))
-# filtered_tokens = [word for word in tokens if word.lower() not in stop_words]
-
-# # Optional: Lemmatize tokens
-# lemmatizer = WordNetLemmatizer()
-# lemmatized_tokens = [lemmatizer.lemmatize(token) for token in filtered_tokens]
-
-# # print(lemmatized_tokens)
-
-# sia = SentimentIntensityAnalyzer()
-# sentiment_score = sia.polarity_scores(' '.join(lemmatized_tokens))
-
-# positive = sentiment_score['pos'] * 100
-# negative = sentiment_score['neg'] * 100
 
 
-# # sentiment_quotient = positive / negative
+# Example financial article
+print("Here are the two headlines: \n")
+headlines = ""
+headlines += CNBC_article_text + "\n"
+headlines += yahoo_article_text
+print(headlines)
 
-# print("\n----Analysis----\n")
-# print("Sources: CNBC, Yahoo Finance")
-# print(sentiment_score)
-# # print("Sentiment Quotient: " + str(sentiment_quotient))
-# print("\n------------------------\n")
+# Tokenize the article
+tokens = word_tokenize(headlines)
 
-# # Load the existing data
-# with open('results.json', 'r') as file:
-#     data = json.load(file)
+# Remove stopwords
+stop_words = set(stopwords.words('english'))
+filtered_tokens = [word for word in tokens if word.lower() not in stop_words]
 
-# master_key = "data"
+# Optional: Lemmatize tokens
+lemmatizer = WordNetLemmatizer()
+lemmatized_tokens = [lemmatizer.lemmatize(token) for token in filtered_tokens]
 
-# data[master_key][headlines] = sentiment_score
+# print(lemmatized_tokens)
 
-# with open('results.json', 'w') as file:
-#     json.dump(data, file, indent=4)
+sia = SentimentIntensityAnalyzer()
+sentiment_score = sia.polarity_scores(' '.join(lemmatized_tokens))
 
-# print("Results logged in results.json")
+positive = sentiment_score['pos'] * 100
+negative = sentiment_score['neg'] * 100
+
+
+# sentiment_quotient = positive / negative
+
+print("\n----Analysis----\n")
+print("Sources: CNBC, Yahoo Finance")
+print(sentiment_score)
+# print("Sentiment Quotient: " + str(sentiment_quotient))
+print("\n------------------------\n")
+
+# Load the existing data
+with open('results.json', 'r') as file:
+    data = json.load(file)
+
+master_key = "data"
+
+data[master_key][headlines] = sentiment_score
+
+with open('results.json', 'w') as file:
+    json.dump(data, file, indent=4)
+
+print("Results logged in results.json")
