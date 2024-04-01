@@ -64,7 +64,7 @@ print(CNBC_article_text)
 # Yahoo Finance ##
 
 print("\n\nLet's look at Yahoo Finance. . .\n\n")
-Get URL
+# Get URL
 url = 'https://finance.yahoo.com/'
 response = requests.get(url)
 html_content = response.text
@@ -78,7 +78,7 @@ headline_link = soup.find(class_="js-content-viewer").find(class_="W(100%)")['al
 
 yahoo_article_text = headline_link
 
-Go to headline article
+# Go to headline article
 url = headline_link
 response = requests.get(url)
 html_content = response.text
